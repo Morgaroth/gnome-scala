@@ -15,6 +15,16 @@ class RichEdit[T <: gtk.Entry](underlying: T) {
   def enabled: T = enable(true)
 
   def disabled: T = enable(false)
+
+  def text_=(newValue: String): T = {
+    underlying.setText(newValue)
+    underlying
+  }
+
+  def text_=(newValue: Option[String]): T = {
+    underlying.setText(newValue.getOrElse(""))
+    underlying
+  }
 }
 
 trait RichEditOps {

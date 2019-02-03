@@ -11,6 +11,16 @@ class RichButton[T <: gtk.Button](underlying: T) {
     })
     underlying
   }
+
+  def text_=(newValue: String): T = {
+    underlying.setLabel(newValue)
+    underlying
+  }
+
+  def text_=(newValue: Option[String]): T = {
+    underlying.setLabel(newValue.getOrElse(""))
+    underlying
+  }
 }
 
 trait RichButtonOps {

@@ -1,4 +1,4 @@
-import TutPlugin.safeRelativize
+
 
 val Versions = new {
   val scalatest = "3.0.5"
@@ -15,7 +15,10 @@ val root = project.in(file("."))
     organization := "io.morgaroth",
     scalaVersion := "2.12.7",
 
+    resolvers += Resolver.bintrayRepo("morgaroth", "maven"),
+
     libraryDependencies ++= Seq(
+      "io.morgaroth" % "java-gnome" % "4.1.2",
       "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging,
       "org.typelevel" %% "cats-core" % Versions.cats,
     ),
