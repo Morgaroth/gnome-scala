@@ -9,7 +9,8 @@ package object scala
     with RichEditOps
     with RichWindowOps
     with RichLabelOps
-    with RichLayoutsOps {
+    with RichLayoutsOps
+    with RichGtkOps {
 
   implicit def strM = new Monoid[String] {
     override def empty = ""

@@ -35,6 +35,8 @@ val root = project.in(file("."))
       Nil
     },
 
+    fork in Test := true,
+
     //Compile / compile := ((Compile / compile) dependsOn tut).value
     publishArtifact in Test := false,
 
@@ -48,7 +50,7 @@ val root = project.in(file("."))
 
     validate := Def.task {
       (Test / test).value
-      tut.value
+//      tut.value
     }.value
   )
 

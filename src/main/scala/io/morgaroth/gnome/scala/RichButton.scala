@@ -4,31 +4,32 @@ import org.gnome.gtk
 
 import scala.language.implicitConversions
 
-class RichButton[T <: gtk.Button](underlying: T) {
-  def onClick(callback: T => Unit): T = {
+class RichButton[T <: gtk.Button](val underlying: T) {
+  type Out = T
+
+  def onClick(callback: T => Unit): RichButton[T] = {
     underlying.connect(new gtk.Button.Clicked {
       override def onClicked(button: gtk.Button) = callback(button.asInstanceOf[T])
     })
-    underlying
+    this
   }
 
-  def text_=(newValue: String): T = {
+  def setText(newValue: String): RichButton[T] = {
     underlying.setLabel(newValue)
-    underlying
+    this
   }
 
-  def text_=(newValue: Option[String]): T = {
-    underlying.setLabel(newValue.getOrElse(""))
-    underlying
-  }
+  def setText(newValue: Option[String]): RichButton[T] = setText(newValue.getOrElse(""))
 }
 
 trait RichButtonOps {
   implicit def toRichButton[T <: gtk.Button](raw: T) = new RichButton(raw)
 
-  def Button(title: String, onClick: gtk.Button => Unit = _ => ()): gtk.Button = new gtk.Button(title).onClick(onClick)
+  implicit def toNormalButton[T <: gtk.Button](raw: RichButton[T]) = raw.underlying
 
-  def Button(title: String): gtk.Button = new gtk.Button(title)
+  def Button(title: String, onClick: gtk.Button => Unit = _ => ()): RichButton[gtk.Button] = new RichButton(new gtk.Button(title).onClick(onClick))
 
-  def Btn(title: String): gtk.Button = Button(title)
+  def Button(title: String): RichButton[gtk.Button] = new RichButton(new gtk.Button(title))
+
+  def Btn(title: String): RichButton[gtk.Button] = new RichButton(Button(title))
 }

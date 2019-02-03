@@ -1,7 +1,7 @@
 # Installation
 ```
 resolvers += Resolver.bintrayRepo("morgaroth", "maven")
-libraryDependencies += "io.morgaroth" %% "op-rabbit-rpc" % "1.0.0"
+libraryDependencies += "io.morgaroth" %% "gnome-scala" % "1.0.2"
 ```
 
 # Usage
@@ -9,34 +9,15 @@ libraryDependencies += "io.morgaroth" %% "op-rabbit-rpc" % "1.0.0"
 ### Server
 
 ```tut
-import com.spingo.op_rabbit.Directives._
-import io.morgaroth.oprabbit.config.QueueConfig
-import io.morgaroth.oprabbit.server.BaseRpcServer
-import io.morgaroth.oprabbit.RabbitControlActor
+import io.morgaroth.gnome.scala._
 
-// define queue configuration
-val queueCfg = QueueConfig("qname", "", 5, List("*"))
+// required
+initializeGtk()
 
-// define handlers
-val handleSimpleTaskHandler =
-  routingKey {
-    case "simple-task" =>
-      println("simple task handled")
-      ack()
-  }
+// create button
+val btn1 = Btn("Some name")
+val btn2 = Button("Another name")
 
-val debugHandler =
-  routingKey { rk =>
-    body(as[String]) { content =>
-      println(s"$rk: $content")
-      ack()
-    }
-  }
-
-// set up server
-val server = new BaseRpcServer(queueCfg, List(handleSimpleTaskHandler, debugHandler))
-
-// prepare environment
-implicit val rc = RabbitControlActor.deadLetters
-server.subscribe()
+// set text using option
+btn2.setText(Some("Save"))
 ```
