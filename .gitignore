@@ -2,6 +2,7 @@
 /target
 /project/target
 /project/project
+/examples/target
 /.ivy2
 /.sbt
 /.ssh
