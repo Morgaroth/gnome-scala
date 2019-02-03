@@ -16,7 +16,7 @@ stages:
 
 before_script:
   - apt update
-  - apt install dnsutils netcat-openbsd --no-install-recommends -y
+  - apt install dnsutils netcat-openbsd --no-install-recommends libjava-gnome-java -y
   - printenv | grep '^[A-Z][A-Z_]*=.*' | grep -v '^_..*' | sort
 
 tests:
