@@ -1,6 +1,5 @@
 package io.morgaroth.gnome.scala
 
-import javafx.scene.control.ToggleButton
 import org.gnome.gtk
 
 import scala.language.implicitConversions
