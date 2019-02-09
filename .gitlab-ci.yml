@@ -6,9 +6,10 @@ cache:
     - $PWD/.sbt/
 
 variables:
+  DISPLAY: :178
   GIT_STRATEGY: clone
   GIT_SUBMODULE_STRATEGY: none
-  GET_SOURCES_ATTEMPTS: 3
+#  GET_SOURCES_ATTEMPTS: 3
 
 stages:
   - validate
@@ -16,8 +17,9 @@ stages:
 
 before_script:
   - apt update
-  - apt install dnsutils netcat-openbsd --no-install-recommends libjava-gnome-java -y
+  - apt install dnsutils netcat-openbsd --no-install-recommends libjava-gnome-java xvfb -y
   - printenv | grep '^[A-Z][A-Z_]*=.*' | grep -v '^_..*' | sort
+  - Xvfb :178 &
 
 tests:
   stage: validate
