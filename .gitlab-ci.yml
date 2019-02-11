@@ -31,7 +31,6 @@ release:
   only:
     - master
   script:
-    - env | sort
     - mkdir ~/.ssh
     - ssh-keyscan -H -p 22 gitlab.com > ~/.ssh/known_hosts
     - echo "${_SSH_DEPLOY_PRIVATE_KEY}" > ~/.ssh/id_rsa
