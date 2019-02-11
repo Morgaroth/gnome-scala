@@ -6,7 +6,7 @@ cache:
     - $PWD/.sbt/
 
 variables:
-  DISPLAY: :178
+  DISPLAY: ':178'
   GIT_STRATEGY: clone
   GIT_SUBMODULE_STRATEGY: none
 #  GET_SOURCES_ATTEMPTS: 3
