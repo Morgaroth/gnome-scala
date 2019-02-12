@@ -1,13 +1,10 @@
 package io.morgaroth.gnome.scala
 
-import org.gnome.gtk.CheckButton
 import org.scalatest.{FlatSpec, Matchers}
 
 class RichButtonTest extends FlatSpec with Matchers {
 
   initializeGtk()
-
-  new CheckButton()
 
   "RichButton" should "convert from button" in {
     """new org.gnome.gtk.Button("text").onClick(_ => {
@@ -30,5 +27,9 @@ class RichButtonTest extends FlatSpec with Matchers {
 
   it should "set text using option" in {
     """new org.gnome.gtk.Button().setText(Some("ala ma kota"))""" should compile
+  }
+
+  it should "work when joined richbutton method and widgetbutton" in {
+    """new org.gnome.gtk.Button().setText(Some("ala ma kota")).disabled""" should compile
   }
 }

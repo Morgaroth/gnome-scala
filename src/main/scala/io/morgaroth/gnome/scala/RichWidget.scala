@@ -17,6 +17,5 @@ class RichWidget[T <: org.gnome.gtk.Widget](underlying: T) {
 }
 
 trait RichWidgetOps {
-  implicit def toRichWidget[T <: gtk.Widget](raw: T) = new RichWidget(raw)
-
+  implicit def toRichWidget[T <: gtk.Widget](raw: T): RichWidget[T] = new RichWidget(raw)
 }

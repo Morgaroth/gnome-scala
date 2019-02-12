@@ -26,7 +26,7 @@ class RichCheckbox[T <: gtk.CheckButton](underlying: T) {
 }
 
 trait RichCheckboxOps {
-  implicit def toRichCheckbox[T <: gtk.CheckButton](raw: T) = new RichCheckbox(raw)
+  implicit def toRichCheckbox[T <: gtk.CheckButton](raw: T): RichCheckbox[T] = new RichCheckbox(raw)
 
   def Checkbox(title: String): gtk.CheckButton = new org.gnome.gtk.CheckButton(title)
 
