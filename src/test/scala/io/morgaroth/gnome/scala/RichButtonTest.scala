@@ -32,4 +32,8 @@ class RichButtonTest extends FlatSpec with Matchers {
   it should "work when joined richbutton method and widgetbutton" in {
     """new org.gnome.gtk.Button().setText(Some("ala ma kota")).disabled""" should compile
   }
+
+  it should "work entities are created using support methods" in {
+    """Btn("test").setText(Some("ala ma kota")).disabled""" should compile
+  }
 }

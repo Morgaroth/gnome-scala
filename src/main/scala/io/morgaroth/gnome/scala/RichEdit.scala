@@ -28,9 +28,9 @@ class RichEdit[T <: gtk.Entry](underlying: T) {
 }
 
 trait RichEditOps {
-  implicit def toRichEdit[T <: gtk.Entry](raw: T) = new RichEdit(raw)
+  implicit def toRichEdit[T <: gtk.Entry](raw: T): RichEdit[T] = new RichEdit(raw)
 
-  def Edit() = new gtk.Entry()
+  def Edit(): gtk.Entry = new gtk.Entry()
 
-  def Edit(text: String) = new gtk.Entry(text)
+  def Edit(text: String): gtk.Entry = new gtk.Entry(text)
 }

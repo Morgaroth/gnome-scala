@@ -27,9 +27,9 @@ trait RichButtonOps {
 
   implicit def toNormalButton[T <: gtk.Button](raw: RichButton[T]): T = raw.underlying
 
-  def Button(title: String, onClick: gtk.Button => Unit = _ => ()): RichButton[gtk.Button] = new RichButton(new gtk.Button(title).onClick(onClick))
+  def Button(title: String, onClick: gtk.Button => Unit = _ => ()): gtk.Button = new gtk.Button(title).onClick(onClick)
 
-  def Button(title: String): RichButton[gtk.Button] = new RichButton(new gtk.Button(title))
+  def Button(title: String): gtk.Button = new gtk.Button(title)
 
-  def Btn(title: String): RichButton[gtk.Button] = new RichButton(Button(title))
+  def Btn(title: String): gtk.Button = Button(title)
 }
