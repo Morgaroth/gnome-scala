@@ -8,7 +8,7 @@ libraryDependencies += "io.morgaroth" %% "gnome-scala" % "1.0.2"
 
 ### Server
 
-```tut
+```scala mdoc
 import io.morgaroth.gnome.scala._
 
 // required
