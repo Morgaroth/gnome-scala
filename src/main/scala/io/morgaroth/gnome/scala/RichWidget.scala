@@ -14,6 +14,11 @@ class RichWidget[T <: org.gnome.gtk.Widget](underlying: T) {
   def enabled: T = enable(true)
 
   def disabled: T = enable(false)
+
+  def withSizeRequest(width: Int, height: Int): T = {
+    underlying.setSizeRequest(width, height)
+    underlying
+  }
 }
 
 trait RichWidgetOps {

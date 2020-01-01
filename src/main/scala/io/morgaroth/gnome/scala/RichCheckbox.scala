@@ -7,7 +7,7 @@ import scala.language.implicitConversions
 class RichCheckbox[T <: gtk.CheckButton](underlying: T) {
   def onToggle(callback: (Boolean, T) => Unit): T = {
     underlying.connect(new gtk.ToggleButton.Toggled {
-      override def onToggled(toggleButton: gtk.ToggleButton) = {
+      override def onToggled(toggleButton: gtk.ToggleButton): Unit = {
         callback(toggleButton.getActive, toggleButton.asInstanceOf[T])
       }
     })

@@ -1,8 +1,9 @@
 package io.morgaroth.gnome.scala
 
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class RichButtonTest extends FlatSpec with Matchers {
+class RichButtonTest extends AnyFlatSpec with Matchers {
 
   initializeGtk()
 
