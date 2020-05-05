@@ -64,5 +64,5 @@ val examples = project.in(file("examples"))
   .dependsOn(root)
   .settings(
     scalaVersion := "2.13.1",
-    publishArtifact := false
+e    publishArtifact := false
   )
