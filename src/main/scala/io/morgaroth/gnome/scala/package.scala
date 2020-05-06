@@ -10,9 +10,11 @@ package object scala
     with RichWindowOps
     with RichLabelOps
     with RichLayoutsOps
+    with RichComboBoxOps
+    with RichComboBoxTextOps
     with RichGtkOps {
 
-  implicit def strM = new Monoid[String] {
+  implicit def strM: Monoid[String] = new Monoid[String] {
     override def empty = ""
 
     override def combine(x: String, y: String) = x + y
