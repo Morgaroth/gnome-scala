@@ -1,6 +1,6 @@
 package io.morgaroth.gnome.scala
 
-import org.gnome.gtk
+import org.gnome.{gdk, gtk}
 
 import scala.language.implicitConversions
 
@@ -19,6 +19,22 @@ class RichWidget[T <: org.gnome.gtk.Widget](underlying: T) {
     underlying.setSizeRequest(width, height)
     underlying
   }
+
+  def onKeyUp(callback: gdk.EventKey => ActionHandled): T = {
+    underlying.connect(new gtk.Widget.KeyReleaseEvent {
+      override def onKeyReleaseEvent(widget: gtk.Widget, eventKey: gdk.EventKey) = {
+        callback(eventKey) == EventWasHandledFully
+      }
+    })
+    underlying
+  }
+
+  def onEnter(callback: () => ActionHandled): T = {
+    onKeyUp { evt =>
+      if (evt.getKeyval == gdk.Keyval.Return || evt.getKeyval.toString == "Keyval.KP_Enter") callback() else AllowFurtherHandling
+    }
+  }
+
 }
 
 trait RichWidgetOps {

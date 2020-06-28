@@ -1,8 +1,15 @@
 package io.morgaroth.gnome.scala
 
-import org.gnome.gtk
+import org.gnome.{gdk, gtk}
 
 import scala.language.implicitConversions
+
+sealed trait ActionHandled extends Product with Serializable
+
+case object EventWasHandledFully extends ActionHandled
+
+case object AllowFurtherHandling extends ActionHandled
+
 
 class RichEdit[T <: gtk.Entry](underlying: T) {
 
