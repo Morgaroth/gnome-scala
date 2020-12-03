@@ -13,9 +13,9 @@ val root = project.in(file("."))
   .settings(
     name := "gnome-scala",
     organization := "io.morgaroth",
-    scalaVersion := "2.13.1",
+    scalaVersion := "2.13.3",
 
-    crossScalaVersions := Seq("2.12.10", "2.13.1"),
+    crossScalaVersions := Seq("2.12.12", "2.13.3"),
 
     resolvers += Resolver.bintrayRepo("morgaroth", "maven"),
 
