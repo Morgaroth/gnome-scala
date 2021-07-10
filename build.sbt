@@ -1,5 +1,4 @@
 
-
 val Versions = new {
   val scalatest = "3.1.0"
   val scalaLogging = "3.9.2"
@@ -17,11 +16,11 @@ val root = project.in(file("."))
 
     crossScalaVersions := Seq("2.12.12", "2.13.3"),
 
-    resolvers += Resolver.bintrayRepo("morgaroth", "maven"),
+    resolvers += "Artifactory" at "https://mateuszjajedev.jfrog.io/artifactory/maven/",
 
     libraryDependencies ++= Seq(
       "io.morgaroth" % "java-gnome" % "4.1.2" % Provided,
-//      "java" % "java-gnome" % "4.1.2" from "file:///usr/share/java/gtk.jar",
+      //      "java" % "java-gnome" % "4.1.2" from "file:///usr/share/java/gtk.jar",
       "com.typesafe.scala-logging" %% "scala-logging" % Versions.scalaLogging,
       "org.typelevel" %% "cats-core" % Versions.cats,
 
@@ -35,27 +34,32 @@ val root = project.in(file("."))
       Nil
     },
 
-    fork in Test := true,
+    Test / fork := true,
 
     //Compile / compile := ((Compile / compile) dependsOn tut).value
-    publishArtifact in Test := false,
+    Test / publishArtifact := false,
 
     // Bintray
     licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
-    bintrayVcsUrl := Some("https://gitlab.com/morgaroth/gnome-scala.git"),
 
     // Release
-    releaseTagComment := s"Releasing ${(version in ThisBuild).value} [skip ci]",
-    releaseCommitMessage := s"Setting version to ${(version in ThisBuild).value} [skip ci]",
-    releaseNextCommitMessage := s"Setting version to ${(version in ThisBuild).value} [skip ci]",
+    releaseTagComment := s"Releasing ${(ThisBuild / version).value} [skip ci]",
+    releaseCommitMessage := s"Setting version to ${(ThisBuild / version).value} [skip ci]",
+    releaseNextCommitMessage := s"Setting version to ${(ThisBuild / version).value} [skip ci]",
     releaseCrossBuild := true,
+    publishMavenStyle := true,
+    credentials += Credentials(file(sys.env.getOrElse("JFROG_CREDENTIALS_FILE", ".credentials"))),
+    versionScheme := Some("semver-spec"),
+    publishTo := Some {
+      if (isSnapshot.value) "Artifactory releases" at "https://mateuszjajedev.jfrog.io/artifactory/maven/"
+      else "Artifactory snapshots" at s"https://mateuszjajedev.jfrog.io/artifactory/maven;build.timestamp=${new java.util.Date().getTime}"
+    },
 
     validate := Def.task {
       (Test / test).value
-//      tut.value
+      //      tut.value
     }.value
   )
-
 
 val examples = project.in(file("examples"))
   .dependsOn(root)
