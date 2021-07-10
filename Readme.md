@@ -1,6 +1,6 @@
 # Installation
 ```
-resolvers += Resolver.bintrayRepo("morgaroth", "maven")
+resolvers += "Artifactory" at "https://mateuszjajedev.jfrog.io/artifactory/maven/"
 libraryDependencies += "io.morgaroth" %% "gnome-scala" % "1.0.2"
 ```
 
